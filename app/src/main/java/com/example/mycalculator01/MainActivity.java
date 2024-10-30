@@ -4,18 +4,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView vInputCurrent;
     private TextView vTempResult;
 
-    private Button bOpearationCancel;
+    private Button bOperationClear;
+    private Button bOperationAllClear;
     private Button bOperationEqual;
 
     private Button bDigit1;
@@ -43,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         vInputCurrent = findViewById(R.id.input_current);
         vTempResult = findViewById(R.id.temp_result);
 
-        bOpearationCancel = findViewById(R.id.operation_cancel);
+        bOperationClear = findViewById(R.id.operation_clear);
+        bOperationAllClear = findViewById(R.id.operation_all_clear);
         bOperationEqual = findViewById(R.id.operation_equal);
 
         bDigit1 = findViewById(R.id.digit_1);
@@ -65,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
         bOperationComma = findViewById(R.id.operation_comma);
 
 
-        bOpearationCancel.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Cancel");
+        bOperationClear.setOnClickListener(v -> {
+            vTempResult.setText("Clicked Clear");
+        });
+        bOperationAllClear.setOnClickListener(v -> {
+            vTempResult.setText("Clicked All Clear");
         });
         bOperationEqual.setOnClickListener(v -> {
             vTempResult.setText("Clicked Equal");

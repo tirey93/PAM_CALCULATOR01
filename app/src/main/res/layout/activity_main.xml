@@ -46,15 +46,18 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/operation_cancel"
+                android:id="@+id/operation_clear"
                 android:layout_width="match_parent"
                 android:backgroundTint="@color/design_default_color_error"
                 android:layout_height="match_parent"
                 android:text="C" />
 
-            <TableRow
+            <Button
+                android:id="@+id/operation_all_clear"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:backgroundTint="@color/design_default_color_error"
+                android:layout_height="match_parent"
+                android:text="AC" />
 
             <TableRow
                 android:layout_width="match_parent"
