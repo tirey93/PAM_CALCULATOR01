@@ -163,7 +163,7 @@
                 android:text="3" />
 
             <Button
-                android:id="@+id/operation_substracting"
+                android:id="@+id/operation_subtract"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="-" />
@@ -194,7 +194,7 @@
                 android:text="," />
 
             <Button
-                android:id="@+id/operation_adding"
+                android:id="@+id/operation_add"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="+" />
