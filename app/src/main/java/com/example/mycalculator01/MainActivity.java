@@ -70,13 +70,13 @@ public class MainActivity extends CalculationActivity {
 
 
         bOperationClear.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Clear");
+            handleClear();
         });
         bOperationAllClear.setOnClickListener(v -> {
-            vTempResult.setText("Clicked All Clear");
+            handleClearAll();
         });
         bOperationEqual.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Equal");
+            handleEqual();
         });
 
 

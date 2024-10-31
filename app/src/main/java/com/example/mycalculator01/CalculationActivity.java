@@ -33,11 +33,26 @@ public class CalculationActivity extends AppCompatActivity {
         }
     }
 
-    public void handleComma(){
+    public void handleEqual(){
 
+    }
+
+    public void handleComma(){
+        calculation.putComma();
+        vInputCurrent.setText(calculation.getInput());
     }
     public void handleNeg(){
 
+    }
+
+    public void handleClear(){
+        calculation.clear();
+        vInputCurrent.setText(calculation.getInput());
+    }
+
+    public void handleClearAll(){
+        calculation.clearAll();
+        vInputCurrent.setText(calculation.getInput());
     }
 
     @Override
