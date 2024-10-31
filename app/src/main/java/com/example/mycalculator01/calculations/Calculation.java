@@ -44,11 +44,15 @@ public class Calculation {
     }
 
     public String getResult(){
-        if(listOperations.isEmpty() || currentNumber.isEmpty())
-            return "";
-        double listCalculated = calculateFromList();
-        double result = doOperation(listCalculated, Double.parseDouble(currentNumber), getLastOperation().getValue());
-        return String.valueOf(result);
+        try {
+            if(listOperations.isEmpty() || currentNumber.isEmpty())
+                return "";
+            double listCalculated = calculateFromList();
+            double result = doOperation(listCalculated, Double.parseDouble(currentNumber), getLastOperation().getValue());
+            return String.valueOf(result);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -78,11 +82,17 @@ public class Calculation {
                 listOperations.remove(operation);
                 listOperations.add(new Operation(OperationType.Operation, OperationLiteral.Subtract));
             }
-            return;
+            else {
+                negHandleCurrentNumber();
+            }
+        }else {
+            negHandleCurrentNumber();
         }
+    }
 
+    private void negHandleCurrentNumber() {
         if(currentNumber.isEmpty()){
-            currentNumber = "-";
+            currentNumber = "-1";
         }else if(currentNumber.startsWith("-")){
             currentNumber = currentNumber.substring(1);
         }
