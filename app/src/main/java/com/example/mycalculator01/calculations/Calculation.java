@@ -64,12 +64,35 @@ public class Calculation {
         currentOperation = "";
     }
 
+    public void putNeg(){
+        if(isLastOperationAnOperation()){
+            Operation operation = getLastOperation();
+            if(operation.getValue().equals(OperationLiteral.Subtract)){
+                listOperations.remove(operation);
+                listOperations.add(new Operation(OperationType.Operation, OperationLiteral.Add));
+            } else if(operation.getValue().equals(OperationLiteral.Add)){
+                listOperations.remove(operation);
+                listOperations.add(new Operation(OperationType.Operation, OperationLiteral.Subtract));
+            }
+            return;
+        }
+
+        if(currentNumber.isEmpty()){
+            currentNumber = "-";
+        }else if(currentNumber.startsWith("-")){
+            currentNumber = currentNumber.substring(1);
+        }
+        else{
+            currentNumber = "-" + currentNumber;
+        }
+    }
+
     private void handleOneArgOperations(String operation) throws CalculationException {
        throw new CalculationException("Unknown operation");
     }
 
     private void handleTwoArgOperations(String operation) throws CalculationException {
-        if(isCharacterToReplace()){
+        if(isOperationToReplace()){
             listOperations.remove(listOperations.size() - 1);
         }
         else {
@@ -90,10 +113,17 @@ public class Calculation {
         return currentNumber.toCharArray()[currentNumber.length() - 1] == '.';
     }
 
-    private boolean isCharacterToReplace() {
+    private boolean isOperationToReplace() {
+        return isLastOperationAnOperation() && currentNumber.isEmpty();
+    }
+
+    private boolean isLastOperationAnOperation() {
         return !listOperations.isEmpty()
-                && listOperations.get(listOperations.size() - 1).getOperationType().equals(OperationType.Operation)
-                && currentNumber.isEmpty();
+                && getLastOperation().getOperationType().equals(OperationType.Operation);
+    }
+
+    private Operation getLastOperation() {
+        return listOperations.get(listOperations.size() - 1);
     }
 
     private boolean hasInputFirstArg() {

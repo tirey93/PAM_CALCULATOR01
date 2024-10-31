@@ -42,7 +42,8 @@ public class CalculationActivity extends AppCompatActivity {
         vInputCurrent.setText(calculation.getInput());
     }
     public void handleNeg(){
-
+        calculation.putNeg();
+        vInputCurrent.setText(calculation.getInput());
     }
 
     public void handleClear(){
