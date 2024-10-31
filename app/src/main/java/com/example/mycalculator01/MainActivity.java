@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mycalculator01.calculations.OperationLiteral;
 import com.example.mycalculator01.calculations.Calculation;
-import com.example.mycalculator01.exceptions.CalculationException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends CalculationActivity {
 
     private TextView vInputCurrent;
     private TextView vTempResult;
@@ -45,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Calculation calculation = new Calculation();
         vInputCurrent = findViewById(R.id.input_current);
         vTempResult = findViewById(R.id.temp_result);
+        setvInputCurrent(vInputCurrent);
+        setvTempResult(vTempResult);
 
         bOperationClear = findViewById(R.id.operation_clear);
         bOperationAllClear = findViewById(R.id.operation_all_clear);
@@ -81,60 +81,55 @@ public class MainActivity extends AppCompatActivity {
 
 
         bDigit1.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 1");
-            calculation.putDigit(1);
+            handleDigit(1);
         });
         bDigit2.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 2");
+            handleDigit(2);
         });
         bDigit3.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 3");
+            handleDigit(3);
         });
         bDigit4.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 4");
+            handleDigit(4);
         });
         bDigit5.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 5");
+            handleDigit(5);
         });
         bDigit6.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 6");
+            handleDigit(6);
         });
         bDigit7.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 7");
+            handleDigit(7);
         });
         bDigit8.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 8");
+            handleDigit(8);
         });
         bDigit9.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 9");
+            handleDigit(9);
         });
         bDigit0.setOnClickListener(v -> {
-            vInputCurrent.setText("Clicked 0");
+            handleDigit(0);
         });
 
 
         bOperationDivide.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Divide");
-            try {
-                calculation.putOperation(OperationLiteral.Divide);
-            } catch (CalculationException e) {
-                throw new RuntimeException(e);
-            }
+            handleOperation(OperationLiteral.Divide);
         });
         bOperationMultiply.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Multiply");
+            handleOperation(OperationLiteral.Multiply);
         });
         bOperationSubtract.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Subtract");
+            handleOperation(OperationLiteral.Subtract);
         });
         bOperationAdd.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Add");
+            handleOperation(OperationLiteral.Add);
         });
+
         bOperationNeg.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Neg");
+            handleNeg();
         });
         bOperationComma.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Comma");
+            handleComma();
         });
     }
 }
