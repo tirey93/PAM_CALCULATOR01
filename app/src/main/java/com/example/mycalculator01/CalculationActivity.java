@@ -19,12 +19,14 @@ public class CalculationActivity extends AppCompatActivity {
     public void handleDigit(int digit){
         calculation.putDigit(digit);
         vInputCurrent.setText(calculation.getInput());
+        vTempResult.setText(calculation.getResult());
     }
 
     public void handleOperation(String operation) {
         try {
             calculation.putOperation(operation);
             vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
         } catch (CalculationException e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -40,20 +42,24 @@ public class CalculationActivity extends AppCompatActivity {
     public void handleComma(){
         calculation.putComma();
         vInputCurrent.setText(calculation.getInput());
+        vTempResult.setText(calculation.getResult());
     }
     public void handleNeg(){
         calculation.putNeg();
         vInputCurrent.setText(calculation.getInput());
+        vTempResult.setText(calculation.getResult());
     }
 
     public void handleClear(){
         calculation.clear();
         vInputCurrent.setText(calculation.getInput());
+        vTempResult.setText(calculation.getResult());
     }
 
     public void handleClearAll(){
         calculation.clearAll();
         vInputCurrent.setText(calculation.getInput());
+        vTempResult.setText(calculation.getResult());
     }
 
     @Override

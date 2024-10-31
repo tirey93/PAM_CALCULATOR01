@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationLiteral {
-    public static String Divide = "÷";
-    public static String Multiply = "×";
-    public static String Subtract = "-";
-    public static String Add = "+";
-    public static String Sinus = "sin";
+    public static final String Divide = "÷";
+    public static final String Multiply = "×";
+    public static final String Subtract = "-";
+    public static final String Add = "+";
+    public static final String Sinus = "sin";
 
     public static Map<String, String> TwoArgOperations = Map.of(
             "÷", Divide,

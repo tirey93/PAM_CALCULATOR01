@@ -10,11 +10,16 @@ public class Operation {
         this.value = value;
     }
 
-    public OperationType getOperationType() {
+    public OperationType getType() {
         return operationType;
     }
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return operationType + " - " + value;
     }
 }

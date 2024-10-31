@@ -43,10 +43,14 @@ public class Calculation {
         return String.join(" ", res) + " " + currentNumber;
     }
 
-    public double getResult(){
-
-        return result;
+    public String getResult(){
+        if(listOperations.isEmpty() || currentNumber.isEmpty())
+            return "";
+        double listCalculated = calculateFromList();
+        double result = doOperation(listCalculated, Double.parseDouble(currentNumber), getLastOperation().getValue());
+        return String.valueOf(result);
     }
+
 
     public void clear(){
         if(listOperations.isEmpty() && currentNumber.isEmpty())
@@ -87,6 +91,36 @@ public class Calculation {
         }
     }
 
+    private double calculateFromList(){
+        double result = Double.parseDouble(listOperations.get(0).getValue());
+        String operation = "";
+
+        for(Operation o : listOperations.subList(1, listOperations.size() - 1)) {
+            switch (o.getType()) {
+                case Number: {
+                    result = doOperation(result, Double.parseDouble(o.getValue()), operation);
+                    break;
+                }
+                case Operation: {
+                    operation = o.getValue();
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private double doOperation(double result, double component, String operation) {
+        switch (operation){
+            case OperationLiteral.Add: return result + component;
+            case OperationLiteral.Subtract: return result - component;
+            case OperationLiteral.Multiply: return result * component;
+            case OperationLiteral.Divide: return result / component;
+        }
+        return result;
+    }
+
     private void handleOneArgOperations(String operation) throws CalculationException {
        throw new CalculationException("Unknown operation");
     }
@@ -119,7 +153,7 @@ public class Calculation {
 
     private boolean isLastOperationAnOperation() {
         return !listOperations.isEmpty()
-                && getLastOperation().getOperationType().equals(OperationType.Operation);
+                && getLastOperation().getType().equals(OperationType.Operation);
     }
 
     private Operation getLastOperation() {
