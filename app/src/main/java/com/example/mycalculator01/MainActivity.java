@@ -6,6 +6,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mycalculator01.calculations.OperationLiteral;
+import com.example.mycalculator01.calculations.Calculation;
+import com.example.mycalculator01.exceptions.CalculationException;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView vInputCurrent;
@@ -33,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private Button bOperationNeg;
     private Button bOperationComma;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Calculation calculation = new Calculation();
         vInputCurrent = findViewById(R.id.input_current);
         vTempResult = findViewById(R.id.temp_result);
 
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         bDigit1.setOnClickListener(v -> {
             vInputCurrent.setText("Clicked 1");
+            calculation.putDigit(1);
         });
         bDigit2.setOnClickListener(v -> {
             vInputCurrent.setText("Clicked 2");
@@ -107,7 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         bOperationDivide.setOnClickListener(v -> {
-            vTempResult.setText("Clicked Cancel");
+            vTempResult.setText("Clicked Divide");
+            try {
+                calculation.putOperation(OperationLiteral.Divide);
+            } catch (CalculationException e) {
+                throw new RuntimeException(e);
+            }
         });
         bOperationMultiply.setOnClickListener(v -> {
             vTempResult.setText("Clicked Multiply");

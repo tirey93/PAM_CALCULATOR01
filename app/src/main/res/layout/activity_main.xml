@@ -102,7 +102,7 @@
                 android:id="@+id/operation_divide"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="/" />
+                android:text="÷" />
 
         </TableRow>
 
@@ -136,7 +136,7 @@
                 android:id="@+id/operation_multiply"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="*" />
+                android:text="×" />
         </TableRow>
 
         <TableRow
@@ -181,7 +181,7 @@
                 android:id="@+id/operation_neg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="+/-" />
+                android:text="±" />
 
             <Button
                 android:id="@+id/digit_0"
