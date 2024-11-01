@@ -20,11 +20,4 @@ public class OperationLiteral {
             "sin", Sinus
 
     );
-
-    public static Map<String, String> getAllOperations(){
-        Map<String, String> result = new HashMap<>();
-        result.putAll(OneArgOperations);
-        result.putAll(TwoArgOperations);
-        return  result;
-    }
 }
