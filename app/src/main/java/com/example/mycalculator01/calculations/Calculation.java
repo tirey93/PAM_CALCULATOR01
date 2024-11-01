@@ -1,16 +1,13 @@
 package com.example.mycalculator01.calculations;
 import com.example.mycalculator01.exceptions.CalculationException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Calculation {
     private String currentNumber = "";
-    private String currentOperation = "";
-    protected double result;
-
-    private List<Operation> listOperations = new ArrayList<>();
+    private final Stack<Operation> operationStack = new Stack<>();
 
     public void putDigit(int digit){
         currentNumber += digit;
@@ -39,16 +36,16 @@ public class Calculation {
     }
 
     public String getInput() {
-        List<String> res = listOperations.stream().map(Operation::getValue).collect(Collectors.toList());
+        List<String> res = operationStack.stream().map(Operation::getValue).collect(Collectors.toList());
         return String.join(" ", res) + " " + currentNumber;
     }
 
     public String getResult(){
         try {
-            if(listOperations.isEmpty() || currentNumber.isEmpty())
+            if(operationStack.isEmpty() || currentNumber.isEmpty())
                 return "";
             double listCalculated = calculateFromList();
-            double result = doOperation(listCalculated, Double.parseDouble(currentNumber), getLastOperation().getValue());
+            double result = doOperation(listCalculated, Double.parseDouble(currentNumber), operationStack.lastElement().getValue());
             return String.valueOf(result);
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
@@ -59,42 +56,41 @@ public class Calculation {
         if(!currentNumber.isEmpty()){
             currentNumber = currentNumber.substring(0, currentNumber.length() -1);
         }
-        else if(!listOperations.isEmpty()){
+        else if(!operationStack.isEmpty()){
             popFromList();
         }
     }
 
     private void popFromList() {
-        listOperations.remove(listOperations.size() - 1);
-        currentNumber = getLastOperation().getValue();
-        listOperations.remove(listOperations.size() - 1);
+        operationStack.pop();
+        currentNumber = operationStack.lastElement().getValue();
+        operationStack.pop();
     }
 
     public void clear(){
-        if(listOperations.isEmpty() && currentNumber.isEmpty())
+        if(operationStack.isEmpty() && currentNumber.isEmpty())
             return;
 
-        if(!listOperations.isEmpty() && currentNumber.isEmpty())
+        if(!operationStack.isEmpty() && currentNumber.isEmpty())
             popFromList();
         else
             currentNumber = "";
     }
 
     public void clearAll(){
-        listOperations.clear();
+        operationStack.clear();
         currentNumber = "";
-        currentOperation = "";
     }
 
     public void putNeg(){
         if(isLastOperationAnOperation()){
-            Operation operation = getLastOperation();
+            Operation operation = operationStack.lastElement();
             if(operation.getValue().equals(OperationLiteral.Subtract)){
-                listOperations.remove(operation);
-                listOperations.add(new Operation(OperationType.Operation, OperationLiteral.Add));
+                operationStack.remove(operation);
+                operationStack.add(new Operation(OperationType.Operation, OperationLiteral.Add));
             } else if(operation.getValue().equals(OperationLiteral.Add)){
-                listOperations.remove(operation);
-                listOperations.add(new Operation(OperationType.Operation, OperationLiteral.Subtract));
+                operationStack.remove(operation);
+                operationStack.add(new Operation(OperationType.Operation, OperationLiteral.Subtract));
             }
             else {
                 negHandleCurrentNumber();
@@ -116,10 +112,10 @@ public class Calculation {
     }
 
     private double calculateFromList(){
-        double result = Double.parseDouble(listOperations.get(0).getValue());
+        double result = Double.parseDouble(operationStack.get(0).getValue());
         String operation = "";
 
-        for(Operation o : listOperations.subList(1, listOperations.size() - 1)) {
+        for(Operation o : operationStack.subList(1, operationStack.size() - 1)) {
             switch (o.getType()) {
                 case Number: {
                     result = doOperation(result, Double.parseDouble(o.getValue()), operation);
@@ -151,7 +147,7 @@ public class Calculation {
 
     private void handleTwoArgOperations(String operation) throws CalculationException {
         if(isOperationToReplace()){
-            listOperations.remove(listOperations.size() - 1);
+            operationStack.remove(operationStack.size() - 1);
         }
         else {
             if(!hasInputFirstArg())
@@ -160,11 +156,10 @@ public class Calculation {
             if(isLastElementComma()) {
                 currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
             }
-            listOperations.add(new Operation(OperationType.Number, currentNumber));
+            operationStack.add(new Operation(OperationType.Number, currentNumber));
             currentNumber = "";
         }
-        listOperations.add(new Operation(OperationType.Operation, operation));
-        currentOperation = operation;
+        operationStack.add(new Operation(OperationType.Operation, operation));
     }
 
     private boolean isLastElementComma() {
@@ -176,13 +171,10 @@ public class Calculation {
     }
 
     private boolean isLastOperationAnOperation() {
-        return !listOperations.isEmpty()
-                && getLastOperation().getType().equals(OperationType.Operation);
+        return !operationStack.isEmpty()
+                && operationStack.lastElement().getType().equals(OperationType.Operation);
     }
 
-    private Operation getLastOperation() {
-        return listOperations.get(listOperations.size() - 1);
-    }
 
     private boolean hasInputFirstArg() {
         return !currentNumber.isEmpty() && !currentNumber.equals("0.");
