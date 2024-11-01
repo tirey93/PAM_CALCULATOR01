@@ -17,9 +17,14 @@ public class CalculationActivity extends AppCompatActivity {
     private  Calculation calculation = new Calculation();
 
     public void handleDigit(int digit){
-        calculation.putDigit(digit);
-        vInputCurrent.setText(calculation.getInput());
-        vTempResult.setText(calculation.getResult());
+        try {
+            calculation.putDigit(digit);
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void handleOperation(String operation) {
@@ -40,26 +45,56 @@ public class CalculationActivity extends AppCompatActivity {
     }
 
     public void handleComma(){
-        calculation.putComma();
-        vInputCurrent.setText(calculation.getInput());
-        vTempResult.setText(calculation.getResult());
+        try {
+            calculation.putComma();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
     public void handleNeg(){
-        calculation.putNeg();
-        vInputCurrent.setText(calculation.getInput());
-        vTempResult.setText(calculation.getResult());
+        try {
+            calculation.putNeg();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
+    public void handleClearCharacter(){
+        try {
+            calculation.clearCharacter();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
     public void handleClear(){
-        calculation.clear();
-        vInputCurrent.setText(calculation.getInput());
-        vTempResult.setText(calculation.getResult());
+        try {
+            calculation.clear();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void handleClearAll(){
-        calculation.clearAll();
-        vInputCurrent.setText(calculation.getInput());
-        vTempResult.setText(calculation.getResult());
+        try {
+            calculation.clearAll();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

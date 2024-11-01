@@ -55,13 +55,27 @@ public class Calculation {
         }
     }
 
+    public void clearCharacter() {
+        if(!currentNumber.isEmpty()){
+            currentNumber = currentNumber.substring(0, currentNumber.length() -1);
+        }
+        else if(!listOperations.isEmpty()){
+            popFromList();
+        }
+    }
+
+    private void popFromList() {
+        listOperations.remove(listOperations.size() - 1);
+        currentNumber = getLastOperation().getValue();
+        listOperations.remove(listOperations.size() - 1);
+    }
 
     public void clear(){
         if(listOperations.isEmpty() && currentNumber.isEmpty())
             return;
 
         if(!listOperations.isEmpty() && currentNumber.isEmpty())
-            listOperations.remove(listOperations.size() - 1);
+            popFromList();
         else
             currentNumber = "";
     }

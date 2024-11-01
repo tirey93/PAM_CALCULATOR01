@@ -1,6 +1,7 @@
 package com.example.mycalculator01;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -70,7 +71,11 @@ public class MainActivity extends CalculationActivity {
 
 
         bOperationClear.setOnClickListener(v -> {
+            handleClearCharacter();
+        });
+        bOperationClear.setOnLongClickListener(v -> {
             handleClear();
+            return true;
         });
         bOperationAllClear.setOnClickListener(v -> {
             handleClearAll();
