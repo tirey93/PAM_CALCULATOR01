@@ -19,8 +19,13 @@ public class Operations {
         this.operationStack = operationStack;
     }
 
+
     public Operation pop(){
         return operationStack.pop();
+    }
+
+    public void clear(){
+        this.operationStack = new Stack<>();
     }
 
     public void push(Operation operation){

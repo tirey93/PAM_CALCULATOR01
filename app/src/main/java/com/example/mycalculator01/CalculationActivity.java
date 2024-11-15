@@ -41,7 +41,14 @@ public class CalculationActivity extends AppCompatActivity {
     }
 
     public void handleEqual(){
-
+        try {
+            calculation.handleEqual();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void handleComma(){

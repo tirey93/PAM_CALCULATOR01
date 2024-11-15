@@ -33,7 +33,7 @@ public class ClearHandler {
 
     public State clearAll(){
         state.getNumber().clear();
-        state.getOperations().setOperationStack(new Stack<>());
+        state.getOperations().clear();
         return state;
     }
 

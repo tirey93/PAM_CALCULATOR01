@@ -6,7 +6,7 @@ import com.example.mycalculator01.handlers.NegHandler;
 import com.example.mycalculator01.handlers.OperationHandler;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Stack;
 
 public class Calculation {
     private State state = new State();
@@ -36,6 +36,11 @@ public class Calculation {
         state = new OperationHandler(state).handleOperation(operation);
     }
 
+    public void handleEqual(){
+        state.getNumber().setCurrentNumber(getResult());
+        state.getOperations().clear();
+    }
+
     public String getInput() {
         List<String> res = state.getOperations().asList();
         return String.join(" ", res) + " " + state.getNumber().getCurrentNumber();
@@ -46,7 +51,9 @@ public class Calculation {
             if(state.getOperations().isEmpty() || state.getNumber().isEmpty())
                 return "";
             double listCalculated = calculateFromList();
-            double result = doOperation(listCalculated, Double.parseDouble(state.getNumber().getCurrentNumber()), state.getOperations().last().getValue());
+            double result = doOperation(listCalculated,
+                    Double.parseDouble(state.getNumber().getCurrentNumber()),
+                    state.getOperations().last().getValue());
             return String.valueOf(result);
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
