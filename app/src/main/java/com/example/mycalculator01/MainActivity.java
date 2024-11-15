@@ -1,5 +1,6 @@
 package com.example.mycalculator01;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,11 +50,12 @@ public class MainActivity extends CalculationActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection.
         int itemId = item.getItemId();
-        if (itemId == R.id.create_new) {
-            Toast.makeText(this, "Wybrano Item 1", Toast.LENGTH_SHORT).show();
+        if (itemId == R.id.authors) {
+            Intent intent = new Intent(MainActivity.this, Authors.class);
+            startActivity(intent);
             return true;
-        } else if (itemId == R.id.open) {
-            Toast.makeText(this, "Wybrano Item 2", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.exit) {
+            finishAndRemoveTask();
             return true;
         }
         return super.onOptionsItemSelected(item);
