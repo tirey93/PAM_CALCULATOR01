@@ -1,9 +1,12 @@
 package com.example.mycalculator01;
 
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.mycalculator01.calculations.OperationLiteral;
@@ -36,6 +39,25 @@ public class MainActivity extends CalculationActivity {
     private Button bOperationNeg;
     private Button bOperationComma;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.default_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection.
+        int itemId = item.getItemId();
+        if (itemId == R.id.create_new) {
+            Toast.makeText(this, "Wybrano Item 1", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (itemId == R.id.open) {
+            Toast.makeText(this, "Wybrano Item 2", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
