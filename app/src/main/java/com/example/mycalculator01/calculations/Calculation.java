@@ -1,4 +1,6 @@
 package com.example.mycalculator01.calculations;
+import androidx.lifecycle.ViewModel;
+
 import com.example.mycalculator01.exceptions.CalculationException;
 import com.example.mycalculator01.handlers.ClearHandler;
 import com.example.mycalculator01.handlers.CommaHandler;
@@ -6,9 +8,8 @@ import com.example.mycalculator01.handlers.NegHandler;
 import com.example.mycalculator01.handlers.OperationHandler;
 
 import java.util.List;
-import java.util.Stack;
 
-public class Calculation {
+public class Calculation extends ViewModel {
     private State state = new State();
 
     public void clearCharacter() {

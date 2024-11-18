@@ -7,8 +7,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mycalculator01.calculations.OperationLiteral;
 import com.example.mycalculator01.calculations.Calculation;
@@ -65,11 +66,15 @@ public class MainActivity extends CalculationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Calculation calculation = new Calculation();
+
+        this.calculation = new ViewModelProvider(this).get(Calculation.class);
+
         vInputCurrent = findViewById(R.id.input_current);
         vTempResult = findViewById(R.id.temp_result);
+
         setvInputCurrent(vInputCurrent);
         setvTempResult(vTempResult);
+        updateCurrentState();
 
         bOperationClear = findViewById(R.id.operation_clear);
         bOperationAllClear = findViewById(R.id.operation_all_clear);

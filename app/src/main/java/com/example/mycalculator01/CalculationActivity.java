@@ -14,7 +14,17 @@ public class CalculationActivity extends AppCompatActivity {
     private TextView vInputCurrent;
     private TextView vTempResult;
 
-    private  Calculation calculation = new Calculation();
+    protected  Calculation calculation;
+
+    protected void updateCurrentState(){
+        try {
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 
     public void handleDigit(int digit){
         try {
