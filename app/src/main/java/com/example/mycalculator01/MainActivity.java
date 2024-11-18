@@ -94,71 +94,109 @@ public class MainActivity extends CalculationActivity {
         bOperationComma = findViewById(R.id.operation_comma);
 
 
-        bOperationClear.setOnClickListener(v -> {
-            handleClearCharacter();
-        });
-        bOperationClear.setOnLongClickListener(v -> {
-            handleClear();
-            return true;
-        });
-        bOperationAllClear.setOnClickListener(v -> {
-            handleClearAll();
-        });
-        bOperationEqual.setOnClickListener(v -> {
-            handleEqual();
-        });
+        if (bOperationClear != null) {
+            bOperationClear.setOnClickListener(v -> {
+                handleClearCharacter();
+            });
+            bOperationClear.setOnLongClickListener(v -> {
+                handleClear();
+                return true;
+            });
+        }
 
+        if (bOperationAllClear != null) {
+            bOperationAllClear.setOnClickListener(v -> {
+                handleClearAll();
+            });
+        }
 
-        bDigit1.setOnClickListener(v -> {
-            handleDigit(1);
-        });
-        bDigit2.setOnClickListener(v -> {
-            handleDigit(2);
-        });
-        bDigit3.setOnClickListener(v -> {
-            handleDigit(3);
-        });
-        bDigit4.setOnClickListener(v -> {
-            handleDigit(4);
-        });
-        bDigit5.setOnClickListener(v -> {
-            handleDigit(5);
-        });
-        bDigit6.setOnClickListener(v -> {
-            handleDigit(6);
-        });
-        bDigit7.setOnClickListener(v -> {
-            handleDigit(7);
-        });
-        bDigit8.setOnClickListener(v -> {
-            handleDigit(8);
-        });
-        bDigit9.setOnClickListener(v -> {
-            handleDigit(9);
-        });
-        bDigit0.setOnClickListener(v -> {
-            handleDigit(0);
-        });
+        if (bOperationEqual != null) {
+            bOperationEqual.setOnClickListener(v -> {
+                handleEqual();
+            });
+        }
 
+        if (bDigit1 != null) {
+            bDigit1.setOnClickListener(v -> {
+                handleDigit(1);
+            });
+        }
+        if (bDigit2 != null) {
+            bDigit2.setOnClickListener(v -> {
+                handleDigit(2);
+            });
+        }
+        if (bDigit3 != null) {
+            bDigit3.setOnClickListener(v -> {
+                handleDigit(3);
+            });
+        }
+        if (bDigit4 != null) {
+            bDigit4.setOnClickListener(v -> {
+                handleDigit(4);
+            });
+        }
+        if (bDigit5 != null) {
+            bDigit5.setOnClickListener(v -> {
+                handleDigit(5);
+            });
+        }
+        if (bDigit6 != null) {
+            bDigit6.setOnClickListener(v -> {
+                handleDigit(6);
+            });
+        }
+        if (bDigit7 != null) {
+            bDigit7.setOnClickListener(v -> {
+                handleDigit(7);
+            });
+        }
+        if (bDigit8 != null) {
+            bDigit8.setOnClickListener(v -> {
+                handleDigit(8);
+            });
+        }
+        if (bDigit9 != null) {
+            bDigit9.setOnClickListener(v -> {
+                handleDigit(9);
+            });
+        }
+        if (bDigit0 != null) {
+            bDigit0.setOnClickListener(v -> {
+                handleDigit(0);
+            });
+        }
 
-        bOperationDivide.setOnClickListener(v -> {
-            handleOperation(OperationLiteral.Divide);
-        });
-        bOperationMultiply.setOnClickListener(v -> {
-            handleOperation(OperationLiteral.Multiply);
-        });
-        bOperationSubtract.setOnClickListener(v -> {
-            handleOperation(OperationLiteral.Subtract);
-        });
-        bOperationAdd.setOnClickListener(v -> {
-            handleOperation(OperationLiteral.Add);
-        });
+        if (bOperationDivide != null) {
+            bOperationDivide.setOnClickListener(v -> {
+                handleOperation(OperationLiteral.Divide);
+            });
+        }
+        if (bOperationMultiply != null) {
+            bOperationMultiply.setOnClickListener(v -> {
+                handleOperation(OperationLiteral.Multiply);
+            });
+        }
+        if (bOperationSubtract != null) {
+            bOperationSubtract.setOnClickListener(v -> {
+                handleOperation(OperationLiteral.Subtract);
+            });
+        }
+        if (bOperationAdd != null) {
+            bOperationAdd.setOnClickListener(v -> {
+                handleOperation(OperationLiteral.Add);
+            });
+        }
 
-        bOperationNeg.setOnClickListener(v -> {
-            handleNeg();
-        });
-        bOperationComma.setOnClickListener(v -> {
-            handleComma();
-        });
+        if (bOperationNeg != null) {
+            bOperationNeg.setOnClickListener(v -> {
+                handleNeg();
+            });
+        }
+        if (bOperationComma != null) {
+            bOperationComma.setOnClickListener(v -> {
+                handleComma();
+            });
+        }
     }
 }
