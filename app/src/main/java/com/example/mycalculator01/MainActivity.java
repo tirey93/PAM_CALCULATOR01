@@ -41,6 +41,19 @@ public class MainActivity extends CalculationActivity {
     private Button bOperationNeg;
     private Button bOperationComma;
 
+    private Button bOperationSin;
+    private Button bOperationCos;
+    private Button bOperationTan;
+
+    private Button bOperationLn;
+    private Button bOperationLog;
+    private Button bOperationPercent;
+
+    private Button bOperationX2;
+    private Button bOperationPower;
+    private Button bOperationSqrt;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -49,7 +62,6 @@ public class MainActivity extends CalculationActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection.
         int itemId = item.getItemId();
         if (itemId == R.id.authors) {
             Intent intent = new Intent(MainActivity.this, Authors.class);
@@ -98,6 +110,57 @@ public class MainActivity extends CalculationActivity {
         bOperationNeg = findViewById(R.id.operation_neg);
         bOperationComma = findViewById(R.id.operation_comma);
 
+        bOperationSin = findViewById(R.id.operation_sin);
+        bOperationCos = findViewById(R.id.operation_cos);
+        bOperationTan = findViewById(R.id.operation_tan);
+        bOperationLn = findViewById(R.id.operation_ln);
+        bOperationLog = findViewById(R.id.operation_log);
+        bOperationPercent = findViewById(R.id.operation_percent);
+        bOperationX2 = findViewById(R.id.operation_x2);
+        bOperationPower = findViewById(R.id.operation_power);
+        bOperationSqrt = findViewById(R.id.operation_sqrt);
+
+
+        if (bOperationSin != null) {
+            bOperationSin.setOnClickListener(v -> {
+                handleSin();
+            });
+        }
+        if (bOperationCos != null) {
+            bOperationCos.setOnClickListener(v -> {
+                handleCos();
+            });
+        }
+        if (bOperationTan != null) {
+            bOperationTan.setOnClickListener(v -> {
+                handleTan();
+            });
+        }
+        if (bOperationLn != null) {
+            bOperationLn.setOnClickListener(v -> {
+                handleLn();
+            });
+        }
+        if (bOperationLog != null) {
+            bOperationLog.setOnClickListener(v -> {
+                handleLog();
+            });
+        }
+        if (bOperationPercent != null) {
+            bOperationPercent.setOnClickListener(v -> {
+                handlePercent();
+            });
+        }
+        if (bOperationX2 != null) {
+            bOperationX2.setOnClickListener(v -> {
+                handleX2();
+            });
+        }
+        if (bOperationSqrt != null) {
+            bOperationSqrt.setOnClickListener(v -> {
+                handleSqrt();
+            });
+        }
 
         if (bOperationClear != null) {
             bOperationClear.setOnClickListener(v -> {

@@ -42,6 +42,6 @@ public class Operations {
     }
 
     public List<Operation> fromSecondOperation(){
-        return operationStack.subList(1, operationStack.size() - 1);
+        return operationStack.subList(1, operationStack.size());
     }
 }

@@ -114,6 +114,43 @@ public class CalculationActivity extends AppCompatActivity {
         }
     }
 
+    protected void handleSqrt() {
+    }
+
+    protected void handleX2() {
+        try {
+            calculation.handleOneArgAfter("^2");
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    protected void handlePercent() {
+
+    }
+
+    protected void handleLog() {
+
+    }
+
+    protected void handleLn() {
+
+    }
+
+    protected void handleTan() {
+
+    }
+
+    protected void handleCos() {
+
+    }
+
+    protected void handleSin() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,10 +17,10 @@ public class NegHandler {
             Operation operation = state.getOperations().last();
             if(operation.getValue().equals(OperationLiteral.Subtract)){
                 state.getOperations().pop();
-                state.getOperations().push(new Operation(OperationType.Operation, OperationLiteral.Add));
+                state.getOperations().push(new Operation(OperationType.TwoArgOperation, OperationLiteral.Add));
             } else if(operation.getValue().equals(OperationLiteral.Add)){
                 state.getOperations().pop();
-                state.getOperations().push(new Operation(OperationType.Operation, OperationLiteral.Subtract));
+                state.getOperations().push(new Operation(OperationType.TwoArgOperation, OperationLiteral.Subtract));
             }
             else {
                 negHandleCurrentNumber();

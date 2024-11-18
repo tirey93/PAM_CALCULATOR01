@@ -5,7 +5,8 @@ import com.example.mycalculator01.exceptions.CalculationException;
 import com.example.mycalculator01.handlers.ClearHandler;
 import com.example.mycalculator01.handlers.CommaHandler;
 import com.example.mycalculator01.handlers.NegHandler;
-import com.example.mycalculator01.handlers.OperationHandler;
+import com.example.mycalculator01.handlers.OneArgHandler;
+import com.example.mycalculator01.handlers.TwoArgHandler;
 
 import java.util.List;
 
@@ -34,8 +35,12 @@ public class Calculation extends ViewModel {
         state = new NegHandler(state).handleNeg();
     }
     public void putOperation(String operation) throws CalculationException {
-        state = new OperationHandler(state).handleOperation(operation);
+        state = new TwoArgHandler(state).handleTwoArgOperation(operation);
     }
+    public void handleOneArgAfter(String operation) throws CalculationException {
+        state = new OneArgHandler(state).handleOneArgAfter(operation);
+    }
+
 
     public void handleEqual(){
         state.getNumber().setCurrentNumber(getResult());
@@ -71,7 +76,7 @@ public class Calculation extends ViewModel {
                     result = doOperation(result, Double.parseDouble(o.getValue()), operation);
                     break;
                 }
-                case Operation: {
+                case TwoArgOperation: {
                     operation = o.getValue();
                     break;
                 }
