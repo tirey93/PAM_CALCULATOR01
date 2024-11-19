@@ -16,6 +16,17 @@ public class CalculationActivity extends AppCompatActivity {
 
     protected  Calculation calculation;
 
+    protected void handleParenthesis() {
+        try {
+            calculation.putParenthesis();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
     protected void updateCurrentState(){
         try {
             vInputCurrent.setText(calculation.getInput());

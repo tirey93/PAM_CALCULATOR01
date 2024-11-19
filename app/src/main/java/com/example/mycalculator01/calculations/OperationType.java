@@ -4,4 +4,5 @@ public enum OperationType {
     Number,
     TwoArgOperation,
     OneArgOperation,
+    None
 }

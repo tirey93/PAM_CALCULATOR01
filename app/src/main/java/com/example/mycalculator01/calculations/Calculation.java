@@ -6,6 +6,7 @@ import com.example.mycalculator01.handlers.ClearHandler;
 import com.example.mycalculator01.handlers.CommaHandler;
 import com.example.mycalculator01.handlers.NegHandler;
 import com.example.mycalculator01.handlers.OperationHandler;
+import com.example.mycalculator01.handlers.ParenthesisHandler;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -37,12 +38,15 @@ public class Calculation extends ViewModel {
     public void putNeg(){
         state = new NegHandler(state).handleNeg();
     }
+    public void putParenthesis() {
+        state = new ParenthesisHandler(state).handle();
+    }
     public void putOperation(String operation) throws CalculationException {
         state = new OperationHandler(state).handleTwoArgOperation(operation);
     }
     public void handleX2() throws CalculationException {
         state = new OperationHandler(state).handleTwoArgOperation("^");
-        state.getOperations().push(new Operation(OperationType.Number, "2"));
+        state.getNumber().setCurrentNumber("2");
     }
 
 
@@ -79,6 +83,4 @@ public class Calculation extends ViewModel {
         }
         return result;
     }
-
-
 }

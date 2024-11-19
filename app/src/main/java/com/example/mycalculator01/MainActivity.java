@@ -41,6 +41,8 @@ public class MainActivity extends CalculationActivity {
     private Button bOperationNeg;
     private Button bOperationComma;
 
+    private Button bOperationParenthesis;
+
     private Button bOperationSin;
     private Button bOperationCos;
     private Button bOperationTan;
@@ -110,6 +112,7 @@ public class MainActivity extends CalculationActivity {
         bOperationNeg = findViewById(R.id.operation_neg);
         bOperationComma = findViewById(R.id.operation_comma);
 
+        bOperationParenthesis = findViewById(R.id.operation_parenthesis);
         bOperationSin = findViewById(R.id.operation_sin);
         bOperationCos = findViewById(R.id.operation_cos);
         bOperationTan = findViewById(R.id.operation_tan);
@@ -120,7 +123,11 @@ public class MainActivity extends CalculationActivity {
         bOperationPower = findViewById(R.id.operation_power);
         bOperationSqrt = findViewById(R.id.operation_sqrt);
 
-
+        if (bOperationParenthesis != null) {
+            bOperationParenthesis.setOnClickListener(v -> {
+                handleParenthesis();
+            });
+        }
         if (bOperationSin != null) {
             bOperationSin.setOnClickListener(v -> {
                 handleSin();
@@ -154,6 +161,11 @@ public class MainActivity extends CalculationActivity {
         if (bOperationX2 != null) {
             bOperationX2.setOnClickListener(v -> {
                 handleX2();
+            });
+        }
+        if (bOperationPower != null) {
+            bOperationPower.setOnClickListener(v -> {
+                handleOperation(OperationLiteral.Power);
             });
         }
         if (bOperationSqrt != null) {
