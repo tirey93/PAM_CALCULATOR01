@@ -6,15 +6,15 @@ import com.example.mycalculator01.calculations.OperationType;
 import com.example.mycalculator01.calculations.State;
 import com.example.mycalculator01.exceptions.CalculationException;
 
-public class TwoArgHandler {
+public class OperationHandler {
     private final State state;
 
-    public TwoArgHandler(State state) {
+    public OperationHandler(State state) {
         this.state = state;
     }
 
     public State handleTwoArgOperation(String operation) throws CalculationException {
-        if(OperationLiteral.TwoArgOperations.containsKey(operation)) {
+        if(OperationLiteral.TwoArgOperations.contains(operation)) {
             handleTwoArgOperations(operation);
             return state;
         }
@@ -34,7 +34,7 @@ public class TwoArgHandler {
     }
 
     private void handleTwoArgOperations(String operation) throws CalculationException {
-    if(!state.getOperations().isEmpty() && state.getNumber().isEmpty() && !state.getOperations().last().getType().equals(OperationType.OneArgAfterOperation)){
+    if(!state.getOperations().isEmpty() && state.getNumber().isEmpty()){
             state.getOperations().pop();
         }
         else {

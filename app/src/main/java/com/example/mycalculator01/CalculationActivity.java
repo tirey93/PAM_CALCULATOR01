@@ -119,7 +119,7 @@ public class CalculationActivity extends AppCompatActivity {
 
     protected void handleX2() {
         try {
-            calculation.handleOneArgAfter("^2");
+            calculation.handleX2();
             vInputCurrent.setText(calculation.getInput());
             vTempResult.setText(calculation.getResult());
         }

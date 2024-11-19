@@ -5,10 +5,13 @@ import com.example.mycalculator01.exceptions.CalculationException;
 import com.example.mycalculator01.handlers.ClearHandler;
 import com.example.mycalculator01.handlers.CommaHandler;
 import com.example.mycalculator01.handlers.NegHandler;
-import com.example.mycalculator01.handlers.OneArgHandler;
-import com.example.mycalculator01.handlers.TwoArgHandler;
+import com.example.mycalculator01.handlers.OperationHandler;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 public class Calculation extends ViewModel {
     private State state = new State();
@@ -35,10 +38,11 @@ public class Calculation extends ViewModel {
         state = new NegHandler(state).handleNeg();
     }
     public void putOperation(String operation) throws CalculationException {
-        state = new TwoArgHandler(state).handleTwoArgOperation(operation);
+        state = new OperationHandler(state).handleTwoArgOperation(operation);
     }
-    public void handleOneArgAfter(String operation) throws CalculationException {
-        state = new OneArgHandler(state).handleOneArgAfter(operation);
+    public void handleX2() throws CalculationException {
+        state = new OperationHandler(state).handleTwoArgOperation("^");
+        state.getOperations().push(new Operation(OperationType.Number, "2"));
     }
 
 
@@ -56,43 +60,25 @@ public class Calculation extends ViewModel {
         try {
             if(state.getOperations().isEmpty() || state.getNumber().isEmpty())
                 return "";
-            double listCalculated = calculateFromList();
-            double result = doOperation(listCalculated,
-                    Double.parseDouble(state.getNumber().getCurrentNumber()),
-                    state.getOperations().last().getValue());
+
+            String input = convertInputForExp4j(getInput());
+            Expression e = new ExpressionBuilder(input)
+                    .build();
+            double result = e.evaluate();
+
             return String.valueOf(result);
         } catch (NumberFormatException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private double calculateFromList(){
-        double result = Double.parseDouble(state.getOperations().first().getValue());
-        String operation = "";
-
-        for(Operation o : state.getOperations().fromSecondOperation()) {
-            switch (o.getType()) {
-                case Number: {
-                    result = doOperation(result, Double.parseDouble(o.getValue()), operation);
-                    break;
-                }
-                case TwoArgOperation: {
-                    operation = o.getValue();
-                    break;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private double doOperation(double result, double component, String operation) {
-        switch (operation){
-            case OperationLiteral.Add: return result + component;
-            case OperationLiteral.Subtract: return result - component;
-            case OperationLiteral.Multiply: return result * component;
-            case OperationLiteral.Divide: return result / component;
+    private String convertInputForExp4j(String input){
+        String result = input;
+        for (Map.Entry<String, String> entry : OperationLiteral.ToExp4j.entrySet()) {
+            result = result.replace(entry.getKey(), entry.getValue());
         }
         return result;
     }
+
+
 }
