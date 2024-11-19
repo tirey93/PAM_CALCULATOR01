@@ -48,9 +48,21 @@ public class CalculationActivity extends AppCompatActivity {
         }
     }
 
-    public void handleOperation(String operation) {
+    public void handleTwoArgOperation(String operation) {
         try {
-            calculation.putOperation(operation);
+            calculation.putTwoArgOperation(operation);
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        } catch (CalculationException e) {
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    public void handleOneArgOperation(String operation) {
+        try {
+            calculation.putOneArgOperation(operation);
             vInputCurrent.setText(calculation.getInput());
             vTempResult.setText(calculation.getResult());
         } catch (CalculationException e) {
@@ -125,9 +137,6 @@ public class CalculationActivity extends AppCompatActivity {
         }
     }
 
-    protected void handleSqrt() {
-    }
-
     protected void handleX2() {
         try {
             calculation.handleX2();
@@ -143,24 +152,6 @@ public class CalculationActivity extends AppCompatActivity {
 
     }
 
-    protected void handleLog() {
-
-    }
-
-    protected void handleLn() {
-
-    }
-
-    protected void handleTan() {
-
-    }
-
-    protected void handleCos() {
-
-    }
-
-    protected void handleSin() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

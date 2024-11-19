@@ -41,8 +41,11 @@ public class Calculation extends ViewModel {
     public void putParenthesis() {
         state = new ParenthesisHandler(state).handle();
     }
-    public void putOperation(String operation) throws CalculationException {
+    public void putTwoArgOperation(String operation) throws CalculationException {
         state = new OperationHandler(state).handleTwoArgOperation(operation);
+    }
+    public void putOneArgOperation(String operation) throws CalculationException {
+        state = new OperationHandler(state).handleOneArgOperation(operation);
     }
     public void handleX2() throws CalculationException {
         state = new OperationHandler(state).handleTwoArgOperation("^");
@@ -57,29 +60,39 @@ public class Calculation extends ViewModel {
 
     public String getInput() {
         List<String> res = state.getOperations().asList();
-        return String.join(" ", res) + " " + state.getNumber().getCurrentNumber();
+        String result = String.join(" ", res) + " " + state.getNumber().getCurrentNumber();
+
+        result = result.replace(" ( ", "(");
+        result = result.replace(" )", ")");
+        return result;
     }
 
     public String getResult(){
         try {
-            if(state.getOperations().isEmpty() || state.getNumber().isEmpty())
-                return "";
-
-            String input = convertInputForExp4j(getInput());
-            Expression e = new ExpressionBuilder(input)
+            String input = getInput();
+            String converted = convertInputForExp4j(input);
+            Expression e = new ExpressionBuilder(converted)
                     .build();
             double result = e.evaluate();
 
             return String.valueOf(result);
-        } catch (NumberFormatException e) {
+        }
+        catch (IllegalArgumentException ignored){
+
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return "";
     }
 
     private String convertInputForExp4j(String input){
         String result = input;
         for (Map.Entry<String, String> entry : OperationLiteral.ToExp4j.entrySet()) {
             result = result.replace(entry.getKey(), entry.getValue());
+        }
+        if(ParenthesisHandler.isOpen(state)){
+            result += ")";
         }
         return result;
     }

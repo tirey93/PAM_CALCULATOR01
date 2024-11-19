@@ -1,6 +1,7 @@
 package com.example.mycalculator01.handlers;
 
 import com.example.mycalculator01.calculations.Operation;
+import com.example.mycalculator01.calculations.OperationLiteral;
 import com.example.mycalculator01.calculations.OperationType;
 import com.example.mycalculator01.calculations.State;
 
@@ -12,13 +13,17 @@ public class ParenthesisHandler {
     }
 
     public State handle(){
-        if(isOpen()){
+        if(isOpen(state)){
+            if(!state.getNumber().isEmpty()){
+                state.getOperations().push(new Operation(OperationType.Number, state.getNumber().getCurrentNumber()));
+                state.getNumber().clear();
+            }
             state.getOperations().push(new Operation(OperationType.None, ")"));
         }
         return state;
     }
 
-    private boolean isOpen(){
+    public static boolean isOpen(State state){
 
         String input = String.join("", state.getOperations().asList());
 

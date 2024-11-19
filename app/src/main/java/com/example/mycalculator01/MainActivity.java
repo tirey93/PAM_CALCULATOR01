@@ -130,27 +130,27 @@ public class MainActivity extends CalculationActivity {
         }
         if (bOperationSin != null) {
             bOperationSin.setOnClickListener(v -> {
-                handleSin();
+                handleOneArgOperation(OperationLiteral.Sinus);
             });
         }
         if (bOperationCos != null) {
             bOperationCos.setOnClickListener(v -> {
-                handleCos();
+                handleOneArgOperation(OperationLiteral.Cosines);
             });
         }
         if (bOperationTan != null) {
             bOperationTan.setOnClickListener(v -> {
-                handleTan();
+                handleOneArgOperation(OperationLiteral.Tangent);
             });
         }
         if (bOperationLn != null) {
             bOperationLn.setOnClickListener(v -> {
-                handleLn();
+                handleOneArgOperation(OperationLiteral.Ln);
             });
         }
         if (bOperationLog != null) {
             bOperationLog.setOnClickListener(v -> {
-                handleLog();
+                handleOneArgOperation(OperationLiteral.Log);
             });
         }
         if (bOperationPercent != null) {
@@ -165,12 +165,12 @@ public class MainActivity extends CalculationActivity {
         }
         if (bOperationPower != null) {
             bOperationPower.setOnClickListener(v -> {
-                handleOperation(OperationLiteral.Power);
+                handleTwoArgOperation(OperationLiteral.Power);
             });
         }
         if (bOperationSqrt != null) {
             bOperationSqrt.setOnClickListener(v -> {
-                handleSqrt();
+                handleOneArgOperation(OperationLiteral.Sqrt);
             });
         }
 
@@ -249,22 +249,22 @@ public class MainActivity extends CalculationActivity {
 
         if (bOperationDivide != null) {
             bOperationDivide.setOnClickListener(v -> {
-                handleOperation(OperationLiteral.Divide);
+                handleTwoArgOperation(OperationLiteral.Divide);
             });
         }
         if (bOperationMultiply != null) {
             bOperationMultiply.setOnClickListener(v -> {
-                handleOperation(OperationLiteral.Multiply);
+                handleTwoArgOperation(OperationLiteral.Multiply);
             });
         }
         if (bOperationSubtract != null) {
             bOperationSubtract.setOnClickListener(v -> {
-                handleOperation(OperationLiteral.Subtract);
+                handleTwoArgOperation(OperationLiteral.Subtract);
             });
         }
         if (bOperationAdd != null) {
             bOperationAdd.setOnClickListener(v -> {
-                handleOperation(OperationLiteral.Add);
+                handleTwoArgOperation(OperationLiteral.Add);
             });
         }
 

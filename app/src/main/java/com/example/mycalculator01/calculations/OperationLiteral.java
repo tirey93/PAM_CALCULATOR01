@@ -11,6 +11,11 @@ public class OperationLiteral {
     public static final String Power = "^";
 
     public static final String Sinus = "sin";
+    public static final String Cosines = "cos";
+    public static final String Tangent = "tan";
+    public static final String Ln = "ln";
+    public static final String Log = "log";
+    public static final String Sqrt = "sqrt";
 
     public static Set<String> TwoArgOperations = Set.of(
             Divide,
@@ -19,12 +24,19 @@ public class OperationLiteral {
             Add,
             Power
     );
-    public static Map<String, String> OneArgOperations = Map.of(
-
+    public static Set<String>OneArgOperations = Set.of(
+            Sinus,
+            Cosines,
+            Tangent,
+            Ln,
+            Log,
+            Sqrt
     );
 
     public static Map<String, String> ToExp4j = Map.of(
             Divide, "/",
-            Multiply, "*"
+            Multiply, "*",
+            Ln, "log",
+            Log, "log10"
     );
 }
