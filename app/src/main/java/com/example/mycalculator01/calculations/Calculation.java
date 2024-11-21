@@ -7,12 +7,15 @@ import com.example.mycalculator01.handlers.CommaHandler;
 import com.example.mycalculator01.handlers.NegHandler;
 import com.example.mycalculator01.handlers.OperationHandler;
 import com.example.mycalculator01.handlers.ParenthesisHandler;
+import com.example.mycalculator01.handlers.PercentHandler;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculation extends ViewModel {
     private State state = new State();
@@ -51,7 +54,9 @@ public class Calculation extends ViewModel {
         state = new OperationHandler(state).handleTwoArgOperation("^");
         state.getNumber().setCurrentNumber("2");
     }
-
+    public void handlePercent() {
+        state = new PercentHandler(state).handle();
+    }
 
     public void handleEqual(){
         state.getNumber().setCurrentNumber(getResult());
@@ -88,11 +93,34 @@ public class Calculation extends ViewModel {
 
     private String convertInputForExp4j(String input){
         String result = input;
-        for (Map.Entry<String, String> entry : OperationLiteral.ToExp4j.entrySet()) {
-            result = result.replace(entry.getKey(), entry.getValue());
+        result = replaceLiterals(result);
+        result = closeParenthesis(result);
+
+        if(input.contains("%")){
+            Pattern pattern = Pattern.compile("([0-9]+%)");
+            Matcher matcher = pattern.matcher(result);
+            if(matcher.find()){
+                String gr = matcher.group(1);
+
+                String replace = result.replace(gr, "");
+                String prev = replace.substring(0, replace.length() - 4);
+                result = result.replace("%", " * (" + prev + ")/100");
+            }
+
         }
+        return result;
+    }
+
+    private String closeParenthesis(String result) {
         if(ParenthesisHandler.isOpen(state)){
             result += ")";
+        }
+        return result;
+    }
+
+    private static String replaceLiterals(String result) {
+        for (Map.Entry<String, String> entry : OperationLiteral.ToExp4j.entrySet()) {
+            result = result.replace(entry.getKey(), entry.getValue());
         }
         return result;
     }

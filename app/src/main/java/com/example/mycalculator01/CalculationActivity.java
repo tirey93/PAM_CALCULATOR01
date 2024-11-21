@@ -149,7 +149,14 @@ public class CalculationActivity extends AppCompatActivity {
     }
 
     protected void handlePercent() {
-
+        try {
+            calculation.handlePercent();
+            vInputCurrent.setText(calculation.getInput());
+            vTempResult.setText(calculation.getResult());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
 
